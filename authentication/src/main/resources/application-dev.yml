@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/msbp
+    username: postgres
+    password: postgres
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+service:
+  mail:
+    server:
+      url: http://localhost:8080
+      mailAddress: <noreply@local.fr>
+  security:
+    jwt:
+      secret: M2Y4N2YxNmY0Y2E3NDQ2ZmQxOWExM2U1MDhmYTUxODI4MmE4NWNmNWVkZTRhNGUwNzczYjBkZDA5ZDAyZjE2NjVlNDUwZTEyNjViYmFkZDQ5YzkwNGVmMzc2NTRiMDgyODdhYmY4Y2Q0YmM4NGRiNzJlMWZiYjM4ZDZjOTI5Mzg=
+      # Token is valid 24 hours
+      token-validity-in-seconds: 86400
+      token-validity-in-seconds-for-remember-me: 2592000

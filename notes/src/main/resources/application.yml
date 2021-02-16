@@ -1,0 +1,25 @@
+service:
+  security:
+    cors:
+      allowed-origins: '*'
+      allowed-methods: '*'
+      allowed-headers: '*'
+      exposed-headers: 'Authorization,Link,X-Total-Count'
+      allow-credentials: true
+      max-age: 1800
+
+spring:
+  application:
+    name: notes-service
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:8090/eureka
+  instance:
+    appname: notes-service
+    instanceId: notes-service:${spring.application.instance-id:${random.value}}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10

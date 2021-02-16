@@ -1,0 +1,25 @@
+service:
+  security:
+    cors:
+      allowed-origins: '*'
+      allowed-methods: '*'
+      allowed-headers: '*'
+      exposed-headers: 'Authorization,Link,X-Total-Count'
+      allow-credentials: true
+      max-age: 1800
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8090/eureka
+  instance:
+    appname: template-service
+    instanceId: template-service:${spring.application.instance-id:${random.value}}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+spring:
+  application:
+    name: template-service
+
