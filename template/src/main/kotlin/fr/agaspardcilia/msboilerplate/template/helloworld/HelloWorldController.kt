@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
+import java.time.Instant
 
 @RestController
 @RequestMapping("/helloworld")
@@ -23,7 +23,7 @@ class HelloWorldController(private val helloWorldService: HelloWorldService) {
 
     @GetMapping("/now")
     @PermissionRequired(Permission.TEMPLATE_NOW)
-    fun now(): LocalDateTime {
+    fun now(): Instant {
         log.info("Getting current time")
         return helloWorldService.now()
     }
