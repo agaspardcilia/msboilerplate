@@ -1,12 +1,10 @@
 package fr.agaspardcilia.msboilerplate.common.exception
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
-import java.time.LocalDateTime
+import java.time.Instant
 
 open class ServiceControllerAdvice {
 
@@ -28,8 +26,7 @@ open class ServiceControllerAdvice {
     data class ApiExceptionResponse(
         val httpStatus: HttpStatus,
         val message: String,
-        @JsonSerialize(using = LocalDateTimeSerializer::class)
-        val timestamp: LocalDateTime = LocalDateTime.now()
+        val timestamp: Instant = Instant.now()
     )
 
 }

@@ -2,8 +2,16 @@ server:
   port: 8080
 
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
 
 eureka:
   client:
@@ -18,11 +26,3 @@ eureka:
     instanceId: gateway:${spring.application.instance-id:${random.value}}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
-
-zuul:
-  sensitive-headers: Cookie,Set-Cookie
-  strip-prefix: true
-  routes:
-    notes-service: /notes-service/**
-    authentication-service: /authentication-service/**
-    template-service: /template-service/**

@@ -5,13 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy
-import org.springframework.cloud.netflix.zuul.EnableZuulServer
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
+// TODO: fix spring security generating secret when it's not necessary
 @SpringBootApplication
-@EnableZuulProxy
-@EnableEurekaClient
+@EnableDiscoveryClient
 @EnableConfigurationProperties(ServiceProperties::class)
 class GatewayApplication: SpringBootServletInitializer()
 

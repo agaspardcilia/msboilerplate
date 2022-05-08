@@ -8,6 +8,7 @@ enum class Authority(vararg val permissions: Permission) {
         Permission.AUTHENTICATION_USER_GET,
         Permission.AUTHENTICATION_USER_GET_SELF,
 
+        Permission.NOTES_GET,
         Permission.NOTES_CREATE,
         Permission.NOTES_UPDATE,
         Permission.NOTES_DELETE
@@ -18,9 +19,7 @@ enum class Authority(vararg val permissions: Permission) {
         Permission.AUTHENTICATION_USER_REQUEST_PWD_RESET,
         Permission.AUTHENTICATION_USER_RESET_PWD,
         Permission.AUTHENTICATION_USER_CHANGE_PWD,
-        Permission.AUTHENTICATION_USER_ACTIVATE,
-
-        Permission.NOTES_GET
+        Permission.AUTHENTICATION_USER_ACTIVATE
     ),
 }
 

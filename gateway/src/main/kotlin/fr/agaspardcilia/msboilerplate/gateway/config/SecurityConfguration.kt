@@ -1,44 +1,32 @@
 package fr.agaspardcilia.msboilerplate.gateway.config
 
-import fr.agaspardcilia.msboilerplate.gateway.security.JWTConfigurer
-import fr.agaspardcilia.msboilerplate.gateway.security.TokenProvider
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.web.DefaultSecurityFilterChain
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.springframework.web.filter.CorsFilter
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity
+import org.springframework.security.config.web.server.ServerHttpSecurity
+import org.springframework.security.web.server.SecurityWebFilterChain
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-class SecurityConfiguration(
-    private val tokenProvider: TokenProvider,
-    private val corsFilter: CorsFilter,
-) : WebSecurityConfigurerAdapter() {
 
-    @Throws(Exception::class)
-    public override fun configure(http: HttpSecurity) {
-        http
+@Configuration
+@EnableReactiveMethodSecurity
+class SecurityConfiguration {
+
+    @Bean
+    fun securitygWebFilterChain(
+        http: ServerHttpSecurity
+    ): SecurityWebFilterChain? {
+        return http
             .csrf()
             .disable()
-            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter::class.java)
             .headers()
             .frameOptions()
             .disable()
             .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .authorizeExchange()
+            .anyExchange()
+            .permitAll()
             .and()
-            .authorizeRequests()
-            .anyRequest().permitAll()
-            .and()
-            .apply<SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>>(securityConfigurerAdapter())
+            .build()
     }
-
-    private fun securityConfigurerAdapter() = JWTConfigurer(tokenProvider)
-
 }
 

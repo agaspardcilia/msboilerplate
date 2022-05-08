@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.filter.CorsFilter
@@ -28,7 +28,8 @@ class SecurityConfiguration(
     private val corsFilter: CorsFilter,
     private val authenticationManagerBuilder: AuthenticationManagerBuilder,
     private val userDetailsService: UserDetailsService,
-    private val tokenProvider: TokenProvider
+    private val tokenProvider: TokenProvider,
+    private val passwordEncoder: PasswordEncoder
 ) : WebSecurityConfigurerAdapter() {
 
     @PostConstruct
@@ -36,14 +37,11 @@ class SecurityConfiguration(
         try {
             authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder())
+                .passwordEncoder(passwordEncoder)
         } catch (e: java.lang.Exception) {
             throw BeanInitializationException("Security configuration failed", e)
         }
     }
-
-    @Bean
-    fun passwordEncoder() = BCryptPasswordEncoder()
 
     override fun configure(web: WebSecurity?) {
         web!!.ignoring()

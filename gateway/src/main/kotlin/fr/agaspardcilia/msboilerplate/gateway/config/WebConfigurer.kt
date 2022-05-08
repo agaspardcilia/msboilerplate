@@ -21,8 +21,7 @@ import javax.servlet.ServletException
 
 @Configuration
 class WebConfigurer(
-        private val env: Environment,
-        private val serviceProperties: ServiceProperties
+        private val env: Environment
 ) : ServletContextInitializer, WebServerFactoryCustomizer<WebServerFactory> {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -33,19 +32,6 @@ class WebConfigurer(
             log.info("Web application configuration, using profiles: {}", *env.activeProfiles as Array<*>)
         }
         log.info("Web application fully configured")
-    }
-
-    @Bean
-    fun corsFilter(): CorsFilter {
-        val source = UrlBasedCorsConfigurationSource()
-        val config = serviceProperties.security.cors
-        if (config.allowedOrigins != null && config.allowedOrigins!!.isNotEmpty()) {
-            log.debug("Registering CORS filter")
-            source.apply {
-                registerCorsConfiguration("/**", config)
-            }
-        }
-        return CorsFilter(source)
     }
 
     override fun customize(factory: WebServerFactory?) {
