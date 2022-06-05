@@ -7,11 +7,11 @@ import fr.agaspardcilia.msboilerplate.common.security.annotations.PermissionRequ
 import fr.agaspardcilia.msboilerplate.common.security.annotations.PermitAll
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.method.HandlerMethod
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter
+import org.springframework.web.servlet.HandlerInterceptor
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-open class PermissionInterceptor : HandlerInterceptorAdapter() {
+open class PermissionInterceptor : HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         if (request.method.equals("OPTIONS", true)) {

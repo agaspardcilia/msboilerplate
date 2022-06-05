@@ -1,25 +1,30 @@
 package fr.agaspardcilia.msboilerplate.common.security
 
+import fr.agaspardcilia.msboilerplate.common.security.Permission.*
+
 enum class Authority(vararg val permissions: Permission) {
     ADMIN(
-        Permission.AUTHENTICATION_USER_GET_ALL,
+        AUTHENTICATION_USER_GET_ALL,
     ),
     USER(
-        Permission.AUTHENTICATION_USER_GET,
-        Permission.AUTHENTICATION_USER_GET_SELF,
+        AUTHENTICATION_USER_GET,
+        AUTHENTICATION_USER_GET_SELF,
 
-        Permission.NOTES_GET,
-        Permission.NOTES_CREATE,
-        Permission.NOTES_UPDATE,
-        Permission.NOTES_DELETE
+        NOTES_GET,
+        NOTES_CREATE,
+        NOTES_UPDATE,
+        NOTES_DELETE,
+
+        TEMPLATE_NOW,
+        TEMPLATE_HELLO_WORLD
     ),
     ROLE_ANONYMOUS(
-        Permission.AUTHENTICATION_JWT_AUTH,
-        Permission.AUTHENTICATION_USER_REGISTER,
-        Permission.AUTHENTICATION_USER_REQUEST_PWD_RESET,
-        Permission.AUTHENTICATION_USER_RESET_PWD,
-        Permission.AUTHENTICATION_USER_CHANGE_PWD,
-        Permission.AUTHENTICATION_USER_ACTIVATE
+        AUTHENTICATION_JWT_AUTH,
+        AUTHENTICATION_USER_REGISTER,
+        AUTHENTICATION_USER_REQUEST_PWD_RESET,
+        AUTHENTICATION_USER_RESET_PWD,
+        AUTHENTICATION_USER_CHANGE_PWD,
+        AUTHENTICATION_USER_ACTIVATE
     ),
 }
 
