@@ -1,4 +1,4 @@
-package fr.agaspardcilia.msboilerplate.authentication.utils
+package fr.agaspardcilia.msboilerplate.authentication.config
 
 import fr.agaspardcilia.msboilerplate.common.exception.ServiceControllerAdvice
 import org.springframework.web.bind.annotation.RestControllerAdvice
